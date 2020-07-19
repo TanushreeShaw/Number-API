@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Number App!!</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <style>
+            body
+            {
+                background:url("maths1.jpg");
+                background-size:cover;
+	            background-repeat:no repeat;
+                text-align:center;
+                padding:150px;
+                color:black;
+                font-family:cursive;
+                font-size: l0px;
+            }
+            .btn
+            {
+                background-color: black;
+            }
+        </style>
+    </head>
+    <body>
+       <div class="container">
+           <h1 class="text-center mt-5">
+            Number App in JavaScript!!
+            </h1>
+            <form id="Form">
+                <div class="form-group">
+                    <label for="number">Number:</label>
+                    <input type="number" id="number" class="form-control">
+                </div>
+                <label class="radio-inline">
+                    <input type="radio" name="type" value="trivia"checked/>
+                    Trivia
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="type" value="math"/>
+                    Math
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="type" value="year"/>
+                    Year
+                </label>
+
+                <div class="form-group">
+                    <button class="btn btn-danger btn-block">
+                        Get Fact!
+                    </button>
+                </div>
+            </form>
+            <div id="output">
+            </div>
+       </div>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $("#Form").submit(function(e)
+        {
+            e.preventDefault()
+            var number=$("#number").val()
+            var type = $("input[name='type']:checked").val();
+            var url=`http://numbersapi.com/${number}/${type}`
+            var result
+            
+            $.ajax({
+                method:"get",
+                url:url,
+                success:function(data)
+                {
+                    result=`<h2>Do You Know ?<br> ${data}</h2>`
+                    $('#output').html(result)
+                }
+            })
+        })
+    </script>
+</html>
